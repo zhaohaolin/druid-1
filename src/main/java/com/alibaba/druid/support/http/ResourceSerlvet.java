@@ -58,7 +58,8 @@ public abstract class ResourceSerlvet extends HttpServlet {
         this.resourcePath = resourcePath;
     }
 
-    public void init() throws ServletException {
+    @Override
+	public void init() throws ServletException {
         initAuthEnv();
     }
 
@@ -182,11 +183,14 @@ public abstract class ResourceSerlvet extends HttpServlet {
             response.setContentType("text/css;charset=utf-8");
         } else if (fileName.endsWith(".js")) {
             response.setContentType("text/javascript;charset=utf-8");
+        }else if (fileName.endsWith(".html")) {
+        	response.setContentType("text/html;charset=utf-8");
         }
         response.getWriter().write(text);
     }
 
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String contextPath = request.getContextPath();
         String servletPath = request.getServletPath();
         String requestURI = request.getRequestURI();
